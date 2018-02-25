@@ -11,7 +11,7 @@ jquery animate动画的简单实现
         top: 600,
         width: 200,
         height: 200
-    }, time, easingFun);
+    }, time, easingFun);
     
 参考资料
 
