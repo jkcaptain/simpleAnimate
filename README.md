@@ -13,6 +13,8 @@ jquery animate动画的简单实现
         height: 200
     }, time, easingFun);
     
+希望能给大家带来帮助。如有错误之处，还望指出。    
+    
 参考资料
 
 https://github.com/zhangxinxu/Tween/blob/master/tween.js
