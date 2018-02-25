@@ -5,13 +5,13 @@ jquery animate动画的简单实现
 
 用法：
 
-和jQuery animate的用法类似
+可参照 simpleAnimate.html，和jQuery animate的用法类似。
 
     window.simpleAnimate(element, {
         top: 600,
         width: 200,
         height: 200
-    }, 600);
+    }, time, easingFun);
     
 参考资料
 
