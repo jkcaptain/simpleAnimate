@@ -1,9 +1,3 @@
-//缺少动画队列
-/*参考资料
- * https://github.com/zhangxinxu/Tween/blob/master/tween.js
- * http://www.cnblogs.com/aaronjs/p/4278660.html
- * https://github.com/akira-cn/animator.js/blob/master/lib/animator.js
-*/
 (function() {
     if (typeof window.requestAnimationFrame !== "undefined") {
         window.requestAnimationFrame = function(callback, interval) {
@@ -48,6 +42,8 @@
         return +new Date();
     }
 
+    //将对象转为数组
+    //{a:1, b: 2} => [{a: 1}, {b: 2}]
     function objToArr(options) {
         var optionArr = [];
         if (!options || options.toString().slice(8, -1) !== "Object") {
@@ -64,6 +60,7 @@
         return optionArr;
     }
 
+    //动画函数
     function animateFun(elem, attrKey, attrValue, duration, easing) {
         //定义动画初始值
         var startValue = parseInt(getAttr(elem, attrKey));
