@@ -1,69 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>简易动画</title>
-	<style>
-		body{
-			position: relative;
-		}
-		.block{
-			position: absolute; width: 100px; height: 100px; background-color: #000; border-radius: 50%; top:100px; left: 100px;
-		}
-		.block-jq{
-			left: 500px;
-		}
-		.goTop{
-			position: absolute;
-			bottom: 0;
-			left: 0;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>简易动画</title>
+    <style>
+        body {
+            position: relative;
+        }
+
+        .block {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 100px;
+            left: 100px;
+        }
+
+        .block-jq {
+            left: 500px;
+        }
+
+        .goTop {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
 </head>
+
 <body style="height: 2000px">
-	<div id="test" class="block"></div>
-	<div id="test-jq" class="block block-jq"></div>
+    <div id="test" class="block"></div>
+    <div id="test-jq" class="block block-jq"></div>
 
-	<button id="start">start</button>
-	<button id="goTop" class="goTop">goTop</button>
-	
-	<!--测试与jquery animate 的区别-->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="./simpleAnimate.js"></script>
-	
-	<script>
-		var test = document.getElementById('test');
-		var testJq = document.getElementById('test-jq');
+    <button id="start">start</button>
+    <button id="goTop" class="goTop">goTop</button>
 
-		test.addEventListener('click', testFun, false);
-		testJq.addEventListener('click', testJqFun, false);
-		
-		function testFun(){			
-			window.simpleAnimate(this, {
-				top: 600,
-				width: 200,
-				height: 200
-			}, 600);
-		}
+    <!--测试与jquery animate 的区别-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="./simpleAnimate.js"></script>
 
-		function testJqFun(){			
-			$(this).animate({
-				top : 600
-			}, 600)
-		}
+    <script>
+        var test = document.getElementById('test');
+        var testJq = document.getElementById('test-jq');
 
-		document.getElementById('start').addEventListener('click', function(){
-			testFun.call(test);
-			testJqFun.call(testJq);
-		}, false);
+        //缓动公式
+        var Tween = {
+            linear: function (t, b, c, d) {
+                return c * t / d + b;
+            },
+            easeInQuad: function (t, b, c, d) {
+                return c * (t /= d) * t * t * t + b;
+            },
+            easeOutQuad: function (t, b, c, d) {
+                return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+            },
+            easeInOutQuad: function (t, b, c, d) {
+                if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+                return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+            }
+        };
 
+        test.addEventListener('click', testFun, false);
+        testJq.addEventListener('click', testJqFun, false);
 
-		document.getElementById('goTop').addEventListener('click', function(e){
-			window.simpleAnimate(document.documentElement, {
-				scrollTop: 0
-			}, 800, Tween.easeOutQuad);
-		}, false);
+        function testFun() {
+            window.simpleAnimate(this, {
+                top: 600,
+                width: 200,
+                height: 200
+            }, 600);
+        }
 
-	</script>
+        function testJqFun() {
+            $(this).animate({
+                top: 600
+            }, 600)
+        }
+
+        document.getElementById('start').addEventListener('click', function () {
+            testFun.call(test);
+            testJqFun.call(testJq);
+        }, false);
+
+        document.getElementById('goTop').addEventListener('click', function (e) {
+            window.simpleAnimate(document.documentElement, {
+                scrollTop: 0
+            }, 800, Tween.easeOutQuad);
+        }, false);
+
+    </script>
 </body>
+
 </html>
